@@ -14,17 +14,6 @@
       ChatWidget.messages = [];
       ChatWidget.chats = [];
 
-      // Load Font Awesome stylesheet into the parent document if not already loaded.
-      if (!document.querySelector('link[href*="font-awesome"]')) {
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
-        link.integrity = 'sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==';
-        link.crossOrigin = 'anonymous';
-        link.referrerPolicy = 'no-referrer';
-        document.head.appendChild(link);
-      }
-
       // Create or re-use an iframe to host the widget.
       let iframe = document.getElementById('widget-iframe');
       if (!iframe) {
@@ -37,8 +26,8 @@
         iframe.style.border = 'none';
         iframe.style.zIndex = '9999';
         // Size will depend on whether chat is open.
-        iframe.style.width = ChatWidget.openChat ? '450px' : '250px';
-        iframe.style.height = ChatWidget.openChat ? '450px' : 'auto';
+        iframe.style.width = "500px";
+        iframe.style.height = "500px";
         document.body.appendChild(iframe);
       }
       
@@ -73,7 +62,7 @@
           <div id="widget-content">
             <div class="fixed-chatbox" onclick="parent.ChatWidget.toggleChat(true)">
               <div class="relative-chatbox">
-                <div class="triangle"></div>
+               
                 <div style="width:2.5rem;height:2.5rem;">
                   <!-- Your SVG icon here -->
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 113.4 113.4">
@@ -124,7 +113,7 @@
                   </button>
                 </div>
               </div>
-              <!-- Insert additional chat UI here -->
+             
               <div class="chat-ui-container">
                 <div class="chat" id="chat-ui">
                   <div class="messages-container">
@@ -151,7 +140,7 @@
                     <textarea id="chat-input" onKeyup="parent.ChatWidget.handleKeyUp(event)" rows="1" placeholder="Message chatbot..." onInput="parent.ChatWidget.onChange()"></textarea>
                   </div>
                 </div>
-                <button type="submit">
+                <button type="submit" >
                   <i class="fas fa-paper-plane"></i>
                 </button>
               </form>
@@ -165,11 +154,13 @@
         <html>
           <head>
             <meta charset="utf-8">
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
             <style> 
-
-             
-              #widget-container { 
-                  
+              #widget-content { 
+                  font-family: Sora, sans-serif;
                   font-weight: 200;
                   font-size: 14px;
               }
@@ -179,6 +170,12 @@
                   border-radius: 1rem;
                   background: rgb(216, 216, 216);
                   -webkit-box-shadow: inset 0 0 6px rgba(183, 183, 183, 0.5);
+              }
+              
+              button{ 
+                cursor:pointer;
+                background: transparent;
+                border: none
               }
               .textarea-container {
                   -webkit-clip-path: inset(0 0 0 0 round 16px);
@@ -234,7 +231,6 @@
               .relative-chatbox {
                   position: relative;
                   padding: 0.75rem;
-                  width: 100%;
                   display: flex;
                   gap: 0.5rem;
                   align-items: center;
@@ -246,8 +242,8 @@
                   top: -8px; 
                   width: 0;
                   height: 0; 
-                  border-left: 25px solid transparent; 
-                  border-bottom: 15px solid black;
+                  border-left: 10px solid transparent; 
+                  border-bottom: 25px solid black;
                   transform: rotate(3deg);
               } 
               .fixed-chat {
@@ -367,8 +363,10 @@
       ChatWidget.renderChat(document.getElementById('widget-iframe'));
     },
 
-    onChange: function() {
-      const input = document.getElementById("chat-input");
+    onChange: function() { 
+      const iframe = document.getElementById('widget-iframe')
+      const input = iframe.contentDocument.getElementById("chat-input");
+    
       if (input) {
         input.style.height = 'auto';
         input.style.height = input.scrollHeight + 'px';
@@ -383,9 +381,12 @@
     },
 
     sendChat: async function(event) {
+      const iframe = document.getElementById('widget-iframe')
       event.preventDefault();
-      const input = document.getElementById("chat-input");
+      const input = iframe.contentDocument.getElementById("chat-input");
+     
       const question = input ? input.value.trim() : '';
+      
       if (question) {
         ChatWidget.messages.push({ role: "user", content: question });
         ChatWidget.thinking = true;
@@ -425,7 +426,7 @@
                 resolve(chunks);
                 return;
               }
-              const chunk = decoder.decode(value, { stream: true });
+              const chunk = decoder.decode(value, { stream: true }); 
               chunks += chunk;
               if (ChatWidget.messages[ChatWidget.messages.length - 1].role !== 'assistant') {
                 ChatWidget.thinking = false;
