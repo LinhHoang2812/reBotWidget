@@ -12,20 +12,21 @@
       // Allow configuration override if needed.
       ChatWidget.openChat = config.openChat || false;
       ChatWidget.messages = [];
-      ChatWidget.chats = [];
+      ChatWidget.chats = []; 
+
+      //include marked
+     
 
       // Create or re-use an iframe to host the widget.
       let iframe = document.getElementById('widget-iframe');
       if (!iframe) {
         iframe = document.createElement('iframe');
         iframe.id = 'widget-iframe';
-        // Set basic styling to position the iframe.
         iframe.style.position = 'fixed';
         iframe.style.bottom = '1rem';
         iframe.style.right = '1rem';
         iframe.style.border = 'none';
         iframe.style.zIndex = '9999';
-        // Size will depend on whether chat is open.
         iframe.style.width = "500px";
         iframe.style.height = "500px";
         document.body.appendChild(iframe);
@@ -54,8 +55,9 @@
     },
 
     // Build the widget's HTML and write it into the iframe using srcdoc.
-    renderChat: function(iframe) {
-      // Define your widget HTML.
+    renderChat: function(iframe) { 
+      // Define your widget HTML. 
+      
       let widgetHTML = '';
       if (!ChatWidget.openChat) {
         widgetHTML = `
@@ -63,24 +65,10 @@
             <div class="fixed-chatbox" onclick="parent.ChatWidget.toggleChat(true)">
               <div class="relative-chatbox">
                
-                <div style="width:2.5rem;height:2.5rem;">
-                  <!-- Your SVG icon here -->
-                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 113.4 113.4">
-                    <style type="text/css">
-                      .occhiored { fill: #4562A6; }
-                      .occhioblue { fill: #DA3C4C; }
-                      .bocca { fill: white; }
-                    </style>
-                    <g id="boA7kb_1_">
-                        <g>
-                            <path class="occhiored" d="M92,55c-6.4,0-11.2-4.9-11.2-11.3c0-6.6,4.9-11.5,11.4-11.4c6.3,0.1,11.2,5,11.2,11.3 C103.5,50.1,98.5,55,92,55z"/>
-                            <path class="occhioblue" d="M21.1,55c-6.4,0-11.2-4.9-11.2-11.3c0-6.5,5-11.5,11.5-11.4c6.3,0.1,11.2,5,11.3,11.3 C32.7,50,27.6,55,21.1,55z"/>
-                            <path class="bocca" d="M56.8,81.8c-8.2-0.4-15-3.3-19.4-10.6c-1.3-2.2-1.6-4.4,0.9-5.8c2.3-1.3,3.9,0,5.2,2c6.4,9.6,19.8,9.7,26.1,0.1 c1.4-2.1,3-3.6,5.5-2c2.5,1.6,1.9,3.8,0.6,5.9C71.4,78.5,64.7,81.3,56.8,81.8z"/>
-                        </g>
-                    </g>
-                  </svg>
+                <div style="width:2.5rem;height:2.5rem;"
+                  <a href="https://imgbb.com/"><img src="https://i.ibb.co/pjT5mf37/AI-Avatar.png" alt="AI-Avatar" border="0"></a>
                 </div>
-                <p style="color:white;">Come posso aiutarti?</p>
+                <p>Come posso aiutarti?</p>
               </div>
             </div>
           </div>
@@ -92,45 +80,18 @@
               <div class="sticky-header">
                 <div class="flex-header">
                   <div style="width:2.5rem;height:2.5rem;">
-                    <!-- Your SVG icon here -->
-                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 113.4 113.4">
-                      <style type="text/css">
-                        .occhiored { fill: #4562A6; }
-                        .occhioblue { fill: #DA3C4C; }
-                        .bocca { fill: white; }
-                      </style>
-                      <g id="boA7kb_1_">
-                          <g>
-                            <path class="occhiored" d="M92,55c-6.4,0-11.2-4.9-11.2-11.3c0-6.6,4.9-11.5,11.4-11.4c6.3,0.1,11.2,5,11.2,11.3 C103.5,50.1,98.5,55,92,55z"/>
-                            <path class="occhioblue" d="M21.1,55c-6.4,0-11.2-4.9-11.2-11.3c0-6.5,5-11.5,11.5-11.4c6.3,0.1,11.2,5,11.3,11.3 C32.7,50,27.6,55,21.1,55z"/>
-                            <path class="bocca" d="M56.8,81.8c-8.2-0.4-15-3.3-19.4-10.6c-1.3-2.2-1.6-4.4,0.9-5.8c2.3-1.3,3.9,0,5.2,2c6.4,9.6,19.8,9.7,26.1,0.1c1.4-2.1,3-3.6,5.5-2c2.5,1.6,1.9,3.8,0.6,5.9C71.4,78.5,64.7,81.3,56.8,81.8z"/>
-                          </g>
-                        </g>
-                    </svg>
+                    <a href="https://imgbb.com/"><img src="https://i.ibb.co/pjT5mf37/AI-Avatar.png" alt="AI-Avatar" border="0"></a>
                   </div>
                   <button onclick="parent.ChatWidget.toggleChat(false)">
-                    <i class="fas fa-times" style="color:white;font-size:1.5rem;"></i>
+                    <i class="fas fa-times" style="color:gray;font-size:1.5rem;"></i>
                   </button>
                 </div>
               </div>
              
-              <div class="chat-ui-container">
+              <div class="chat-ui-container" >
                 <div class="chat" id="chat-ui">
-                  <div class="messages-container">
-                    ${ChatWidget.messages.map(message => {
-                      return `<div style="display:flex;flex-direction:column;">
-                                <div class="message-div ${message.role === "assistant" ? "ai-message-div" : "human-message-div"}">
-                                  <div class="${message.role === "assistant" ? "ai-message" : "human-message"}">
-                                    ${typeof marked !== "undefined" ? marked.parse(message.content) : message.content}
-                                  </div>
-                                </div>
-                              </div>`;
-                    }).join('')}
-                    ${ChatWidget.thinking ? `
-                      <div class="thinking-div">
-                        <div class="dot-typing"></div>
-                      </div>` : ''}
-                  </div>
+                  <div class="messages-container"  id="messages-container"></div> 
+                   
                 </div>
               </div>
               <!-- Chat input form -->
@@ -141,7 +102,7 @@
                   </div>
                 </div>
                 <button type="submit" >
-                  <i class="fas fa-paper-plane"></i>
+                  <i class="fas fa-paper-plane" style="color:gray"></i>
                 </button>
               </form>
             </div>
@@ -158,6 +119,7 @@
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+            <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.min.js"></script>
             <style> 
               #widget-content { 
                   font-family: Sora, sans-serif;
@@ -176,6 +138,9 @@
                 cursor:pointer;
                 background: transparent;
                 border: none
+              } 
+              p{ 
+                margin:0
               }
               .textarea-container {
                   -webkit-clip-path: inset(0 0 0 0 round 16px);
@@ -198,35 +163,51 @@
                   background: rgb(216, 216, 216);
                   -webkit-box-shadow: inset 0 0 6px rgba(183, 183, 183, 0.5);
               } 
-              .dot-typing {
-                  position: relative;
-                  left: -9999px;
-                  width: 10px;
-                  height: 10px;
-                  border-radius: 5px;
-                  background-color: red;
-                  color: red;
-                  box-shadow: 9984px 0 0 0 red, 9999px 0 0 0 white, 10014px 0 0 0 blue;
-                  animation: dot-typing 1.2s infinite linear;
+             .dot-typing {
+                position: relative;
+                left: -9999px;
+                width: 10px;
+                height: 10px;
+                border-radius: 5px;
+                background-color: white;
+                color: white;
+                box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
+                animation: dot-typing 1.2s infinite linear;
               }
+
               @keyframes dot-typing {
-                  0% { box-shadow: 9984px 0 0 0 red, 9999px 0 0 0 white, 10014px 0 0 0 blue; }
-                  16.667% { box-shadow: 9984px -10px 0 0 red, 9999px 0 0 0 white, 10014px 0 0 0 blue; }
-                  33.333% { box-shadow: 9984px 0 0 0 red, 9999px 0 0 0 white, 10014px 0 0 0 blue; }
-                  50% { box-shadow: 9984px 0 0 0 red, 9999px -10px 0 0 white, 10014px 0 0 0 blue; }
-                  66.667% { box-shadow: 9984px 0 0 0 red, 9999px 0 0 0 white, 10014px 0 0 0 blue; }
-                  83.333% { box-shadow: 9984px 0 0 0 red, 9999px 0 0 0 white, 10014px -10px 0 0 blue; }
-                  100% { box-shadow: 9984px 0 0 0 red, 9999px 0 0 0 white, 10014px 0 0 0 blue; }
-              }  
+                  0% {
+                    box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
+                  }
+                  16.667% {
+                    box-shadow: 9984px -10px 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
+                  }
+                  33.333% {
+                    box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
+                  }
+                  50% {
+                    box-shadow: 9984px 0 0 0 white, 9999px -10px 0 0 white, 10014px 0 0 0 white;
+                  }
+                  66.667% {
+                    box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
+                  }
+                  83.333% {
+                    box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px -10px 0 0 white;
+                  }
+                  100% {
+                    box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
+                  }
+              }
+
               .fixed-chatbox {
                   position: fixed;
                   right: 0.5rem;
                   width: 250px;
                   bottom: 1rem;
                   border-radius: 0.5rem;
-                  background-color: black;
                   cursor: pointer;
                   transform: translateZ(0);
+                  border: solid 1px gray
               } 
               .relative-chatbox {
                   position: relative;
@@ -268,7 +249,6 @@
                   width: 100%;
                   border-top-left-radius: 0.5rem;
                   border-top-right-radius: 0.5rem;
-                  background-color: black;
                   display: flex;
                   justify-content: space-between;
                   align-items: center;
@@ -304,14 +284,15 @@
               } 
               .ai-message-div { 
                   align-self: flex-start;
-                  background-color: black;
-                  color: white;
+                  background-color: gray;
+                  color:white
+                  
               } 
               .human-message-div { 
                   align-self: flex-end;
                   border-width: 1px;
                   border-style: solid;
-                  border-color: black;
+                  border-color: gray;
               } 
               .thinking-div { 
                   position: relative;
@@ -321,7 +302,8 @@
                   justify-content: center;
                   align-items: center;
                   border-radius: 0.5rem;
-                  background-color: black;
+                  border: solid 1px gray;
+                  background-color:gray
               } 
               .form { 
                   padding: 1rem;
@@ -348,16 +330,65 @@
               #chat-input:focus { 
                   outline: none;
               }
+              .writing-dot{ 
+                width:10px;
+                height:10px;
+                display: inline-block; 
+                border-radius: 100%; 
+                background: white;
+                margin-bottom:1px
+              }
             </style>
           </head>
-          <body>${widgetHTML}</body>
+          <body>
+              ${widgetHTML}
+          </body> 
+
+
         </html>
       `;
 
       // Use srcdoc to load content into the iframe.
       iframe.srcdoc = srcdoc;
-    },
+    }, 
 
+    renderMessages(){ 
+      const iframe = document.getElementById('widget-iframe');
+      const marked = iframe.contentWindow.marked; 
+      const messagesContainer = iframe.contentDocument.getElementById("messages-container");
+      const chatUi = iframe.contentDocument.getElementById("chat-ui") 
+      messagesContainer.innerHTML = 
+        ChatWidget.messages.map(message => {
+          return `<div style="display:flex;flex-direction:column;">
+                    <div class="message-div ${message.role === "assistant" ? "ai-message-div" : "human-message-div"}">
+                      <div class="${message.role === "assistant" ? "ai-message" : "human-message"}">
+                        ${marked.parse(message.content)}
+                      </div>
+                    </div>
+                  </div>`;
+        }).join('') + (ChatWidget.thinking ? `
+          <div class="thinking-div">
+            <div class="dot-typing"></div>
+          </div>` : '');  
+
+      chatUi.scrollTop= chatUi.scrollHeight 
+      //writing dot effect 
+      const ai_messages =  iframe.contentDocument.querySelectorAll(".ai-message")
+            if(ai_messages){
+                ai_messages.forEach((m,i)=>{
+                if (i== ai_messages.length -1 && ChatWidget.streaming){
+                    const dot = iframe.contentDocument.createElement('span');
+                    dot.className = 'writing-dot';
+                    m.lastElementChild.appendChild(dot)
+                }
+                })
+            }
+
+      
+    },
+    
+
+   
     toggleChat: function(state) {
       ChatWidget.openChat = state;
       ChatWidget.renderChat(document.getElementById('widget-iframe'));
@@ -383,29 +414,32 @@
     sendChat: async function(event) {
       const iframe = document.getElementById('widget-iframe')
       event.preventDefault();
-      const input = iframe.contentDocument.getElementById("chat-input");
-     
+      const input = iframe.contentDocument.getElementById("chat-input"); 
       const question = input ? input.value.trim() : '';
       
       if (question) {
         ChatWidget.messages.push({ role: "user", content: question });
         ChatWidget.thinking = true;
-        ChatWidget.renderChat(document.getElementById('widget-iframe'));
+        ChatWidget.renderMessages()
+        //ChatWidget.renderChat(document.getElementById('widget-iframe'));
         if (input) input.value = "";
         ChatWidget.get_response_stream(question, ChatWidget.chats)
           .then(data => ChatWidget.getResponseSummary(question, data))
           .catch(err => {
             console.error(err);
             ChatWidget.thinking = false;
-            ChatWidget.renderChat(document.getElementById('widget-iframe'));
+            ChatWidget.renderMessages()
+
+            // ChatWidget.renderChat(document.getElementById('widget-iframe'));
           });
       }
     },
 
     get_response_stream: function(question, chats) {
+    
       chats.push({ role: "user", content: question });
       return new Promise((resolve, reject) => {
-        fetch('https://re2n-ai-bot-api.onrender.com/api/v1/annomynous_response_stream', {
+        fetch('http://localhost:3000/api/v1/annomynous_response_stream', {
           method: 'POST',
           body: JSON.stringify({ question, chats }),
           headers: { 'Content-Type': 'application/json' },
@@ -422,7 +456,8 @@
             reader.read().then(({ done, value }) => {
               if (done) {
                 ChatWidget.streaming = false;
-                ChatWidget.renderChat(document.getElementById('widget-iframe'));
+                ChatWidget.renderMessages()
+                //ChatWidget.renderChat(document.getElementById('widget-iframe'));
                 resolve(chunks);
                 return;
               }
@@ -430,12 +465,13 @@
               chunks += chunk;
               if (ChatWidget.messages[ChatWidget.messages.length - 1].role !== 'assistant') {
                 ChatWidget.thinking = false;
-                ChatWidget.streaming = true;
+                ChatWidget.streaming = true; 
                 ChatWidget.messages.push({ role: 'assistant', content: chunk });
               } else {
                 ChatWidget.messages[ChatWidget.messages.length - 1].content += chunk;
-              }
-              ChatWidget.renderChat(document.getElementById('widget-iframe'));
+              } 
+              ChatWidget.renderMessages()
+              //ChatWidget.renderChat(document.getElementById('widget-iframe'));
               readStream();
             }).catch(error => reject(error));
           };
@@ -447,7 +483,7 @@
 
     getResponseSummary: async function(question, reply) {
       try {
-        const response = await fetch('https://re2n-ai-bot-api.onrender.com/api/v1/annomynous_response_summary', {
+        const response = await fetch('http://localhost:3000/api/v1/annomynous_response_summary', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ question, response: reply }),
