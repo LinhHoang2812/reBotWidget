@@ -82,12 +82,12 @@
                       .occhioblue { fill: #DA3C4C; }
                       .bocca { fill: white; }
                     </style>
-                    <g>
-                      <g>
-                        <path class="occhiored" d="M92,55c-6.4,0-11.2-4.9-11.2-11.3..."/>
-                        <path class="occhioblue" d="M21.1,55c-6.4,0-11.2-4.9-11.2-11.3..."/>
-                        <path class="bocca" d="M56.8,81.8c-8.2-0.4-15-3.3-19.4-10.6..."/>
-                      </g>
+                    <g id="boA7kb_1_">
+                        <g>
+                            <path class="occhiored" d="M92,55c-6.4,0-11.2-4.9-11.2-11.3c0-6.6,4.9-11.5,11.4-11.4c6.3,0.1,11.2,5,11.2,11.3 C103.5,50.1,98.5,55,92,55z"/>
+                            <path class="occhioblue" d="M21.1,55c-6.4,0-11.2-4.9-11.2-11.3c0-6.5,5-11.5,11.5-11.4c6.3,0.1,11.2,5,11.3,11.3 C32.7,50,27.6,55,21.1,55z"/>
+                            <path class="bocca" d="M56.8,81.8c-8.2-0.4-15-3.3-19.4-10.6c-1.3-2.2-1.6-4.4,0.9-5.8c2.3-1.3,3.9,0,5.2,2c6.4,9.6,19.8,9.7,26.1,0.1 c1.4-2.1,3-3.6,5.5-2c2.5,1.6,1.9,3.8,0.6,5.9C71.4,78.5,64.7,81.3,56.8,81.8z"/>
+                        </g>
                     </g>
                   </svg>
                 </div>
@@ -110,13 +110,13 @@
                         .occhioblue { fill: #DA3C4C; }
                         .bocca { fill: white; }
                       </style>
-                      <g>
-                        <g>
-                          <path class="occhiored" d="M92,55c-6.4,0-11.2-4.9-11.2-11.3..."/>
-                          <path class="occhioblue" d="M21.1,55c-6.4,0-11.2-4.9-11.2-11.3..."/>
-                          <path class="bocca" d="M56.8,81.8c-8.2-0.4-15-3.3-19.4-10.6..."/>
+                      <g id="boA7kb_1_">
+                          <g>
+                            <path class="occhiored" d="M92,55c-6.4,0-11.2-4.9-11.2-11.3c0-6.6,4.9-11.5,11.4-11.4c6.3,0.1,11.2,5,11.2,11.3 C103.5,50.1,98.5,55,92,55z"/>
+                            <path class="occhioblue" d="M21.1,55c-6.4,0-11.2-4.9-11.2-11.3c0-6.5,5-11.5,11.5-11.4c6.3,0.1,11.2,5,11.3,11.3 C32.7,50,27.6,55,21.1,55z"/>
+                            <path class="bocca" d="M56.8,81.8c-8.2-0.4-15-3.3-19.4-10.6c-1.3-2.2-1.6-4.4,0.9-5.8c2.3-1.3,3.9,0,5.2,2c6.4,9.6,19.8,9.7,26.1,0.1c1.4-2.1,3-3.6,5.5-2c2.5,1.6,1.9,3.8,0.6,5.9C71.4,78.5,64.7,81.3,56.8,81.8z"/>
+                          </g>
                         </g>
-                      </g>
                     </svg>
                   </div>
                   <button onclick="parent.ChatWidget.toggleChat(false)">
@@ -159,12 +159,7 @@
           </div>
         `;
       }
-
-      // Define styles for the widget (paste your existing styles here)
-      const styles = `
-        
-      `;
-
+  
       // Construct the complete HTML document for the iframe.
       const srcdoc = `
         <html>
